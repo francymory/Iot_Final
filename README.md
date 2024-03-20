@@ -5,3 +5,4 @@ PASSAGGI:
 3. run di csv_prophet.py che svuota la tabella predizione, allena e fa le predizioni di prophet
    e le mette nel database nella tabella predizione (ho messo che la predizione è del giorno corrente e del successivo)
 4. puoi runnare server_AI.py e connetterti con mit e arduino
+5. mentre va server_AI.py per vedere documentazione api vai a http://tuo_ip:5000/docs
