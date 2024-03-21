@@ -108,6 +108,16 @@ def clear_predizione_table():
     # Conferma le modifiche al database
     db.session.commit()
     print("Tabella Predizione svuotata con successo.")
+    
+
+
+# Funzione per svuotare la tabella Presenza nel database
+def clear_presenza_table():
+    # Esegui la query per eliminare tutti i record nella tabella Predizione
+    Presenza.query.delete()
+    # Conferma le modifiche al database
+    db.session.commit()
+    print("Tabella Presenza svuotata con successo.")
 
 
 
@@ -118,3 +128,4 @@ if __name__ == "__main__":
             clear_predizione_table()
             create_csv_from_database()
             make_daily_prediction()
+            clear_presenza_table()

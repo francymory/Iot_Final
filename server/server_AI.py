@@ -271,17 +271,18 @@ def check_isolato(braccialetto_id):
 
     # utilizzo dei dati calcolati dal prophet 
     isolato = 0 if vicini else 1
-    predizione=1
+    predizione=0
 
     if isolato: # se è isolato verifica se si trova in una zona tendenzialmente poco frequentata
         print("braccialetto isolato")
         current_hour=datetime.now().strftime("%Y-%m-%d %H:00:00")
         current_hour=datetime.strptime(current_hour,"%Y-%m-%d %H:%M:%S")
         #current_hour="2026-10-21 23:00:00.000000"      # riga per testing
-        print("cerco una predizione dato ", current_hour, "e ", get_park(braccialetto.latitude, braccialetto.longitude))
+        
         predizione = Predizione.query.filter_by(orario=current_hour,zona=get_park(braccialetto.latitude,braccialetto.longitude)).first()
         if predizione:  # se esiste un record
             n_persone=predizione.n_persone  # controlla quante persone ci sono di solito
+            print("Alle ", current_hour, "e ", get_park(braccialetto.latitude, braccialetto.longitude), "sono predette ", n_persone, "persone")
             if n_persone>0:
                 predizione=0
         else:
@@ -304,4 +305,4 @@ if __name__ == '__main__':
     with app.app_context():
         
         db.create_all()
-        app.run(host='192.168.1.52')
+        app.run(host='192.168.1.185')
