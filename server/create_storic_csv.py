@@ -50,6 +50,8 @@ with open(nome_file_csv, mode='w', newline='') as file:
                        num_persone = 0
                 if current_date.hour >=17 and current_date.hour <= 20:
                     num_persone = random.randint(8, 20)
+                if current_date.hour >=11 and current_date.hour <= 14:
+                    num_persone = 0
 
             if current_date.month >=5 and current_date.month <= 10:
                 num_persone+=random.randint(0,20)

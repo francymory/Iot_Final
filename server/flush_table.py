@@ -1,6 +1,6 @@
 from server_AI import Braccialetto, db, app
 
-# Funzione per svuotare la tabella Presenza nel database
+# Funzione per svuotare la tabella Presenza nel database da runnare ogni mezzora
 def clear_braccialetto_table():
     # Esegui la query per eliminare tutti i record nella tabella Predizione
     Braccialetto.query.delete()

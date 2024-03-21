@@ -247,10 +247,12 @@ def check_isolato(braccialetto_id):
 
     braccialetto = Braccialetto.query.filter_by(identifier=braccialetto_id).first()
     if braccialetto is None:
+        print ("Erroreeee")
         return jsonify({"isolato": 2}), 400     # errore
 
     # Verifica se il braccialetto è isolato o meno
     altri_braccialetti = Braccialetto.query.filter(Braccialetto.identifier != braccialetto_id).all()
+    
     
     cad = 0
     lat = 0
@@ -278,17 +280,15 @@ def check_isolato(braccialetto_id):
         current_hour=datetime.now().strftime("%Y-%m-%d %H:00:00")
         current_hour=datetime.strptime(current_hour,"%Y-%m-%d %H:%M:%S")
         #current_hour="2026-10-21 23:00:00.000000"      # riga per testing
-        
-        predizione = Predizione.query.filter_by(orario=current_hour,zona=get_park(braccialetto.latitude,braccialetto.longitude)).first()
-        if predizione:  # se esiste un record
-            n_persone=predizione.n_persone  # controlla quante persone ci sono di solito
-            print("Alle ", current_hour, "e ", get_park(braccialetto.latitude, braccialetto.longitude), "sono predette ", n_persone, "persone")
+        pred = Predizione.query.filter_by(orario=current_hour,zona=get_park(braccialetto.latitude,braccialetto.longitude)).first()
+        if pred:  # se esiste un record
+            n_persone=pred.n_persone  # controlla quante persone ci sono di solito
+            print("Alle", current_hour, "al", get_park(braccialetto.latitude, braccialetto.longitude), "sono predette", n_persone, "persone")
             if n_persone>0:
                 predizione=0
-        else:
-            predizione=1
+            else:
+                predizione=1
 
-    
     # Prepariamo il dizionario dei parametri
     response_data = {
         "isolato": isolato,             # isolato 0 c'è qualcuno, isolato 1 non c'è nessuno
