@@ -89,7 +89,7 @@ void setup() {
 
   pinMode(BUZZER,OUTPUT);  
   pinMode(RED,OUTPUT);  
-  piMode(YELLOW,OUTPUT); 
+  pinMode(YELLOW,OUTPUT); 
   pinMode(BLUE,OUTPUT);  //led for ble connection
   digitalWrite(BUZZER,LOW);
   digitalWrite(RED,LOW);
@@ -273,12 +273,12 @@ void receiveData(){
         Serial.println("Bracelet is not isolated");
         digitalWrite(RED,LOW);
         digitalWrite(YELLOW,LOW);
-      } else if ( (isolatedStatus == 1) && (predictionStatus == 1) {
+      } else if ( (isolatedStatus == 1) && (predictionStatus == 1)) {
         // Bracelet is isolated and the zone is predicted to be isolated
         Serial.println("Bracelet is isolated and the zone is predicted to be isolated");
         digitalWrite(RED,HIGH);
         digitalWrite(YELLOW,LOW);
-      } else if ( (isolatedStatus == 1) && (predictionStatus == 0) {
+      } else if ( (isolatedStatus == 1) && (predictionStatus == 0)) {
         // Bracelet is isolated but the zone is predicted to not be isolated (it's likely people will come soon)
         Serial.println("Bracelet is isolated but the zone is predicted to not be isolated");
         digitalWrite(RED,LOW);
