@@ -235,6 +235,7 @@ void sendData(){
     if (gps.location.isValid()) {
       float latitude = gps.location.lat();
       float longitude = gps.location.lng();
+      Serial.println(latitude);
 
       // Send GPS data
       String gpsData = String(latitude, 6) + "/" + String(longitude, 6);
@@ -270,22 +271,22 @@ void receiveData(){
       // Process received values
       if (isolatedStatus == 0) {
         // Bracelet is not isolated (I don't care what the fb prediction is)
-        Serial.println("Bracelet is not isolated");
+        //Serial.println("Bracelet is not isolated");
         digitalWrite(RED,LOW);
         digitalWrite(YELLOW,LOW);
       } else if ( (isolatedStatus == 1) && (predictionStatus == 1)) {
         // Bracelet is isolated and the zone is predicted to be isolated
-        Serial.println("Bracelet is isolated and the zone is predicted to be isolated");
+        //Serial.println("Bracelet is isolated and the zone is predicted to be isolated");
         digitalWrite(RED,HIGH);
         digitalWrite(YELLOW,LOW);
       } else if ( (isolatedStatus == 1) && (predictionStatus == 0)) {
         // Bracelet is isolated but the zone is predicted to not be isolated (it's likely people will come soon)
-        Serial.println("Bracelet is isolated but the zone is predicted to not be isolated");
+        //Serial.println("Bracelet is isolated but the zone is predicted to not be isolated");
         digitalWrite(RED,LOW);
         digitalWrite(YELLOW,HIGH);
       } else {
         // Invalid isolated status received
-        Serial.println("Invalid isolated status received");
+        //Serial.println("Invalid isolated status received");
         digitalWrite(RED,HIGH);
         digitalWrite(YELLOW,HIGH);
       }
